@@ -1,7 +1,17 @@
-data/
-
 docs/
 
 */.ipynb_checkpoints
 
 .DS_Store
+
+data/news/News_Category_Dataset_v2.json
+data/news/News_Category_Dataset.json
+
+data/fin_news/stockerbot-export1.csv
+data/fin_news/tweet_sentiment.csv
+
+data/emails
+
+data/financial_tweets/all-data.csv
+
+data/financial_tweets/FinancialPhraseBank
