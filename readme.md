@@ -13,6 +13,8 @@ Then for messages with high probability model gives sentiment: *positive/neutral
 
 [Active link to Colab Notebook with learning and evaluation](https://colab.research.google.com/drive/1JAieTnBlVFxX7bnOXiW04GYMJxQhs0xD?usp=sharing)
 
+---
+
 ### Datasets: find and prepare for learning
 #### Finding ready-to-go dataset
 
@@ -47,3 +49,30 @@ All of these datasets are for sentimental analysis because this kind of problem 
 3. Find cluster with most relevant data for finance, mark it as finance, other non-finance
 4. Run BERT text classification for fine tunung
 
+---
+
+## Results
+
+#### News Category dataset
+
+Fine-tuned pretrained [BERT model for text classification](https://huggingface.co/transformers/model_doc/bert.html?highlight=bertforsequenceclassification#transformers.BertForSequenceClassification) with training paramenters from [this article](https://www.thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python) on balanced dataset I got this results on test data: 
+```python
+              precision    recall  f1-score   support
+
+           0       0.80      0.78      0.79      1328
+           1       0.79      0.81      0.80      1373
+
+    accuracy                           0.79      2701
+   macro avg       0.79      0.79      0.79      2701
+weighted avg       0.79      0.79      0.79      2701
+```
+
+With imbalabnced dataset loss function was not decreasing much, accuracy was not growing for 5000 steps, so training was stopped.
+
+#### Keyword extraction
+
+I tried KeyBERT for keyword extraction from all-financial tweets and news dataset, found some bugs in data preprocessing, playing with paramenters of keywords search. 
+
+Right now 40 most relevant keywords are contain 'bitcoin', 'insiders', 'trader', 'crypto' and other  connected to finance keywords and some strange ones: 'bénéteau', 'equitiesinc', 'itau'.
+
+Next step is find out if these strange ones are company names, currency names (which is okay) or they are nicknames, websites (I cleaned data from them, but...) 
