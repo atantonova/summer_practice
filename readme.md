@@ -78,3 +78,46 @@ I tried KeyBERT for keyword extraction from all-financial tweets and news datase
 Right now 40 most relevant keywords are contain 'bitcoin', 'insiders', 'trader', 'crypto' and other  connected to finance keywords and some strange ones: 'bénéteau', 'equitiesinc', 'itau'.
 
 Next step is find out if these strange ones are company names, currency names (which is okay) or they are nicknames, websites (I cleaned data from them, but...) 
+
+#### Combine financial tweets with no-topic in dataset
+
+I had an assumption that in datasets with no-topic tweets there are not many financial tweets. So I combined 
+- [Sentiment Analysis for Financial News](https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Twitter part of it) into a trainig dataset
+- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Reddit part of it) into a test dataset
+- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [News category dataset](https://www.kaggle.com/rmisra/news-category-dataset) with topic not business or money
+
+Cleaned them from links, account names, numbers, punctuation, made datasets balanced, fine-tuned basic BERT classifier ('bert-base-uncased') on train, predicted on model after 700 steps of optimizer with results. 
+This is reuslt on unseen data, 1000 samples. Result can be better after more steps, model is training at the moment. 
+
+```python
+              precision    recall  f1-score   support
+
+           0       0.96      0.81      0.88       490
+           1       0.84      0.97      0.90       510
+
+    accuracy                           0.89      1000
+   macro avg       0.90      0.89      0.89      1000
+weighted avg       0.90      0.89      0.89      1000
+```
+
+This is result on second test dataset with 100 samples.
+
+```python
+              precision    recall  f1-score   support
+
+           0       0.89      0.31      0.46        51
+           1       0.57      0.96      0.72        49
+
+    accuracy                           0.63       100
+   macro avg       0.73      0.64      0.59       100
+weighted avg       0.73      0.63      0.59       100
+```
+
+Result on hand-written test data
+
+"sell ​​tesla it will fall soon",1
+"you need to buy tesla shares i advise everyone",1
+"bought a new scarf today",0
+"will it rain tomorrow",0
+
+is [1, 1, 1, 0].
