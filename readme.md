@@ -11,7 +11,9 @@ Then for messages with high probability model gives sentiment: *positive/neutral
 
 **notes** - notes on article review, searching of datasets and thier cleaning, model learning and evaluation
 
-[Active link to Colab Notebook with learning and evaluation](https://colab.research.google.com/drive/1JAieTnBlVFxX7bnOXiW04GYMJxQhs0xD?usp=sharing)
+[Link to Colab Notebook with learning and evaluation](https://colab.research.google.com/drive/1JAieTnBlVFxX7bnOXiW04GYMJxQhs0xD?usp=sharing)
+
+[Link to notebook with prediction on trained model](https://colab.research.google.com/drive/1e9ReN9jksHcrRTJJiCJOahHPynkFoRlJ?usp=sharing)
 
 ---
 
@@ -55,7 +57,7 @@ All of these datasets are for sentimental analysis because this kind of problem 
 
 #### News Category dataset
 
-Fine-tuned pretrained [BERT model for text classification](https://huggingface.co/transformers/model_doc/bert.html?highlight=bertforsequenceclassification#transformers.BertForSequenceClassification) with training paramenters from [this article](https://www.thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python) on balanced dataset I got this results on test data: 
+Fine-tuned pretrained [BERT model for text classification](https://huggingface.co/transformers/model_doc/bert.html?highlight=bertforsequenceclassification#transformers.BertForSequenceClassification) with training paramenters from [this article](https://www.thepythoncode.com/article/finetuning-bert-using-huggingface-transformers-python) and [this doc](https://huggingface.co/transformers/custom_datasets.html) on balanced dataset I got this results on test data: 
 ```python
               precision    recall  f1-score   support
 
