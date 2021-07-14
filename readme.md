@@ -2,6 +2,7 @@
 
 The problem is: 
 Build a classifier of text messages so that it gives probability of message's subject being '*finance*'.
+
 Then for messages with high probability model gives sentiment: *positive/neutral/negative*.
 
 #### Folders
@@ -27,9 +28,13 @@ test_data = pd.read_csv(path_to_test_data)
 test_data = clean_data(test_data)
 results = predict_with_sentiment(test_data, classifier, tokenizer_classifier, model_sent, tokenizer_sent)
 ```
+
 ***path_to_classifier***: str - fine-tuned model can be found [here on Google Drive](https://drive.google.com/drive/folders/12KY0j5BUxfHuDsPxO68p46fwR_LXjdGU?usp=sharing)
+
 ***path_to_tokenizer***: str - tokenizer used in training and evaluation of classifier - *'bert-base-uncased'*
+
 ***test_data***: DataFrame - columns: 'text'
+
 ***results***: DataFrame - columns: 'text', 'finance_proba', 'positive', 'neutral', 'negative'
 
 
@@ -134,8 +139,11 @@ weighted avg       0.73      0.63      0.59       100
 Result on hand-written test data
 
 "sell ​​tesla it will fall soon",1
+
 "you need to buy tesla shares i advise everyone",1
+
 "bought a new scarf today",0
+
 "will it rain tomorrow",0
 
 is [1, 1, 1, 0].
