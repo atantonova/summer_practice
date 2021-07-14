@@ -9,8 +9,6 @@ Then for messages with high probability model gives sentiment: *positive/neutral
 
 **data** - datasets, original and edited
 
-**models** - pre-trained models for prediction
-
 [Link to Colab Notebook with learning and evaluation](https://colab.research.google.com/drive/1JAieTnBlVFxX7bnOXiW04GYMJxQhs0xD?usp=sharing)
 
 [Link to notebook with prediction on trained model](https://colab.research.google.com/drive/1e9ReN9jksHcrRTJJiCJOahHPynkFoRlJ?usp=sharing)
