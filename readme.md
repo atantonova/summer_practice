@@ -9,11 +9,31 @@ Then for messages with high probability model gives sentiment: *positive/neutral
 
 **data** - datasets, original and edited
 
-**notes** - notes on article review, searching of datasets and thier cleaning, model learning and evaluation
+**models** - pre-trained models for prediction
 
 [Link to Colab Notebook with learning and evaluation](https://colab.research.google.com/drive/1JAieTnBlVFxX7bnOXiW04GYMJxQhs0xD?usp=sharing)
 
 [Link to notebook with prediction on trained model](https://colab.research.google.com/drive/1e9ReN9jksHcrRTJJiCJOahHPynkFoRlJ?usp=sharing)
+
+---
+## Usage
+
+[predict.ipynb](./code/predict.ipynb) contains functions for 
+- data cleaning
+- loading tokenizers and models
+- predicting classification and sentiment
+
+```python
+classifier, tokenizer_classifier, model_sent, tokenizer_sent = load_model_tokenizer(path_to_classifier, path_to_tokenizer)
+test_data = pd.read_csv(path_to_test_data)
+test_data = clean_data(test_data)
+results = predict_with_sentiment(test_data, classifier, tokenizer_classifier, model_sent, tokenizer_sent)
+```
+***path_to_classifier***: str - fine-tuned model can be found [here on Google Drive](https://drive.google.com/drive/folders/12KY0j5BUxfHuDsPxO68p46fwR_LXjdGU?usp=sharing)
+***path_to_tokenizer***: str - tokenizer used in training and evaluation of classifier - *'bert-base-uncased'*
+***test_data***: DataFrame - columns: 'text'
+***results***: DataFrame - columns: 'text', 'finance_proba', 'positive', 'neutral', 'negative'
+
 
 ---
 
@@ -82,9 +102,9 @@ Next step is find out if these strange ones are company names, currency names (w
 #### Combine financial tweets with no-topic in dataset
 
 I had an assumption that in datasets with no-topic tweets there are not many financial tweets. So I combined 
-- [Sentiment Analysis for Financial News](https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Twitter part of it) into a trainig dataset
-- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Reddit part of it) into a test dataset
-- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [News category dataset](https://www.kaggle.com/rmisra/news-category-dataset) with topic not business or money
+- [Sentiment Analysis for Financial News](https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Twitter part of it) into a trainig dataset - [dataset_for_training](./data/prepared/dataset_for_training.csv)
+- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [Twitter and Reddit Sentimental analysis Dataset](https://www.kaggle.com/cosmos98/twitter-and-reddit-sentimental-analysis-dataset) (Reddit part of it) into a test dataset [dataset_for_testing](./data/prepared/dataset_for_testing.csv)
+- [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [News category dataset](https://www.kaggle.com/rmisra/news-category-dataset) with topic not business or money - [dataset_for_testing_v2](./data/prepared/dataset_for_testing_v2.csv)
 
 Cleaned them from links, account names, numbers, punctuation, made datasets balanced, fine-tuned basic BERT classifier ('bert-base-uncased') on train, predicted on model after 700 steps of optimizer with results. 
 This is reuslt on unseen data, 1000 samples. Result can be better after more steps, model is training at the moment. 
@@ -121,3 +141,9 @@ Result on hand-written test data
 "will it rain tomorrow",0
 
 is [1, 1, 1, 0].
+
+---
+## Sentiment analysis
+
+Second part of the problem was to implement sentiment analysis for messages with high 'finance' probability. 
+For this I used pretrained model [FinBERT](https://github.com/ProsusAI/finBERT). 
