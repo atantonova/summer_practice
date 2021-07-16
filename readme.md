@@ -14,6 +14,8 @@ Then for messages with high probability model gives sentiment: *positive/neutral
 
 [Link to notebook with prediction on trained model](https://colab.research.google.com/drive/1e9ReN9jksHcrRTJJiCJOahHPynkFoRlJ?usp=sharing)
 
+[Trained classifiers](https://drive.google.com/drive/folders/1-eaVGUrygw69_ZK5mmg9t7nfP_39f-Di?usp=sharing)
+
 ---
 ## Usage
 
@@ -110,6 +112,9 @@ I had an assumption that in datasets with no-topic tweets there are not many fin
 - [Sentiment Analysis on Financial Tweets](https://www.kaggle.com/vivekrathi055/sentiment-analysis-on-financial-tweets) and [News category dataset](https://www.kaggle.com/rmisra/news-category-dataset) with topic not business or money - [dataset_for_testing_v2](./data/prepared/dataset_for_testing_v2.csv)
 
 Cleaned them from links, account names, numbers, punctuation, made datasets balanced, fine-tuned basic BERT classifier ('bert-base-uncased') on train, predicted on model after 700 steps of optimizer with results. 
+
+**Classifier-1**
+
 This is reuslt on unseen data, 1000 samples. Result can be better after more steps, model is training at the moment. 
 
 ```python
@@ -147,6 +152,23 @@ Result on hand-written test data
 "will it rain tomorrow",0
 
 is [1, 1, 1, 0].
+
+**Classifier-2**
+
+This is reuslt on second test dataset.
+
+```python
+              precision    recall  f1-score   support
+
+           0       0.74      0.98      0.84       107
+           1       0.97      0.60      0.74        93
+
+    accuracy                           0.81       200
+   macro avg       0.85      0.79      0.79       200
+weighted avg       0.84      0.81      0.80       200
+```
+
+With this recall=0.98 we can say that model catches almost every 'finance' message, but has a lot of false-positive messages
 
 ---
 ## Sentiment analysis
